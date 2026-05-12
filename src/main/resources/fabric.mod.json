@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "auctionpreview",
+  "version": "${version}",
+  "name": "AuctionPreview",
+  "description": "Preview SRP auction items before buying them for real",
+  "authors": ["2500"],
+  "contact": {
+    "homepage": "https://schoolrp.net/",
+    "sources": "https://github.com/twofivezerozero/srpauctionpreview"
+  },
+  "license": "MIT",
+  "icon": "assets/auctionpreview/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "twofive.auctionpreview.AuctionpreviewClient"
+    ]
+  },
+  "mixins": [
+    "auctionpreview.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
