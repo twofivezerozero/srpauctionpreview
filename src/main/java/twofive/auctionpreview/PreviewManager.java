@@ -1,9 +1,9 @@
 package twofive.auctionpreview;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 
 public class PreviewManager {
     private static long endTime = -1L;
@@ -23,18 +23,18 @@ public class PreviewManager {
         endTime = System.currentTimeMillis() + 5000L;
     }
 
-    public static void tick(MinecraftClient client) {
+    public static void tick(Minecraft client) {
         if (endTime == -1L) return;
         if (System.currentTimeMillis() < endTime) return;
         if (client.player == null) return;
 
         if (headPreview) {
-            client.player.equipStack(EquipmentSlot.HEAD, oldHelmet);
+            client.player.setItemSlot(EquipmentSlot.HEAD, oldHelmet);
         } else {
-            client.player.setStackInHand(Hand.MAIN_HAND, oldMainHand);
+            client.player.setItemInHand(InteractionHand.MAIN_HAND, oldMainHand);
         }
 
-        client.player.playerScreenHandler.syncState();
+        client.player.inventoryMenu.broadcastChanges();
         endTime = -1L;
     }
 }
